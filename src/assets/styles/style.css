@@ -9,20 +9,3 @@ body {
   background-color: #303030;
   font-family: 'Bebas Neue', cursive;
 }
-
-@keyframes customTransaction {
-  0%{
-      opacity: 0;
-      transform: scale(0.9);
-  }
-
-  100%{
-      opacity: 1;
-      transform: translate(0);
-  }
-}
-
-@keyframes rotateIcon {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(90deg); }
-}

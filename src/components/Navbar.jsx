@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoImage from '../assets/images/logo-200px.png';
@@ -6,6 +6,9 @@ import { ReactComponent as MenuIcon } from '../assets/images/menu-icon.svg';
 import LogoRepoProvas from './LogoRepoProvas';
 
 export default function Navbar() {
+
+  const [showSidebar, setShowSidebar] = useState();
+
   return (
     <Bar>
       <div>
