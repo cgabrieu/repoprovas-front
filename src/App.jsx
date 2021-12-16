@@ -7,7 +7,7 @@ export default function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/teste" element={<h1>RepoProvas</h1>} />
+        <Route path="/" element={<h1>Home</h1>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
