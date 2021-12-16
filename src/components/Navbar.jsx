@@ -1,45 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Presets } from 'react-component-transition';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoImage from '../assets/images/logo-200px.png';
-import { ReactComponent as MenuIcon } from '../assets/images/menu-icon.svg';
 import LogoRepoProvas from './LogoRepoProvas';
+import Sidebar from './Sidebar';
+import MenuIcon from './MenuIcon';
 
-export default function Navbar() {
-
-  const [showSidebar, setShowSidebar] = useState();
-
+export default function Navbar({ showSidebar, setShowSidebar }) {
   return (
-    <Bar>
-      <div>
-        <Link to='/'>
-          <LogoRepoProvas src={LogoImage} alt="RepoProvas" />
-        </Link>
-        <LinkAndMenuIcon>
-          {useLocation().pathname.includes('contribua') ? (
-            <DynamicLink to="/">Busque uma prova</DynamicLink>
-          ) : (
-            <DynamicLink to="/contribua">Envie sua prova</DynamicLink>
-          )}
-          <MenuIconStyled />
-        </LinkAndMenuIcon>
-      </div>
-    </Bar>
+    <>
+      <Bar>
+        <div>
+          <Link to="/">
+            <LogoRepoProvas src={LogoImage} alt="RepoProvas" />
+          </Link>
+          <LinkAndMenuIcon>
+            {useLocation().pathname.includes('contribua') ? (
+              <DynamicLink to="/">Busque uma prova</DynamicLink>
+            ) : (
+              <DynamicLink to="/contribua">Envie sua prova</DynamicLink>
+            )}
+            <Presets.TransitionRotateY>
+              {!showSidebar && (
+                <MenuIcon onClick={() => setShowSidebar(true)} />
+              )}
+            </Presets.TransitionRotateY>
+          </LinkAndMenuIcon>
+        </div>
+      </Bar>
+      <Presets.TransitionSlideRight>
+        {showSidebar && (
+          <Sidebar />
+        )}
+      </Presets.TransitionSlideRight>
+    </>
   );
 }
-
-const MenuIconStyled = styled(MenuIcon)`
-  width: 30px;
-  height: 30px;
-  margin-left: 20px;
-  path {
-    fill: #fffaef;
-  }
-  @media(max-width: 435px) {
-    width: 25px;
-    margin-left: 10px;
-  }
-`;
 
 const Bar = styled.div`
   display: flex;
@@ -70,7 +67,7 @@ const DynamicLink = styled(Link)`
   text-decoration: none;
   color: #fffaef;
   font-size: 22px;
-  @media(max-width: 435px) {
+  @media (max-width: 435px) {
     font-size: 16px;
   }
 `;
