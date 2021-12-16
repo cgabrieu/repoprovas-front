@@ -13,7 +13,7 @@ const Bar = styled.div`
   position: fixed;
   right: 0;
   width: 300px;
-  height: 90vh;
+  height: 98vh;
   background-color: #fffaef;
   margin: 10px;
   border-radius: 5px;
