@@ -8,7 +8,7 @@ const api = axios.create({
 });
 
 
-export function getCoursesList() {
+export function getCourses() {
   return api.get("/courses");
 }
 
