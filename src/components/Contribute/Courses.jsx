@@ -5,10 +5,12 @@ import ItemsContainer from '../ItemsContainer';
 import TitleContainer from '../TitleContainer';
 import ItemContainer from '../ItemContainer';
 import AddHereButton from '../AddHereButton';
-import TitleText from '../TitleText'
+import TitleText from '../TitleText';
+import ModalAnimatePresence from '../ModalAnimatePresence';
 
 export default function Courses({ setComponent }) {
   const [coursesList, setCoursesList] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     getCourses().then((res) => {
@@ -17,18 +19,27 @@ export default function Courses({ setComponent }) {
   }, []);
 
   return (
-    <PageContainer>
-      <TitleContainer>
-        <TitleText>Qual Curso?</TitleText>
-        <AddHereButton>Não encontrou? Adicione aqui</AddHereButton>
-      </TitleContainer>
-      <ItemsContainer>
-        {coursesList.map(({ id, name }) => (
-          <ItemContainer key={id} whileHover={{ scale: 0.95 }} onClick={() => setComponent('classes')}>
-            {name}
-          </ItemContainer>
-        ))}
-      </ItemsContainer>
-    </PageContainer>
+    <>
+      <ModalAnimatePresence title='Cadastrar Curso' modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <PageContainer>
+        <TitleContainer>
+          <TitleText>Qual Curso?</TitleText>
+          <AddHereButton modalOpen={modalOpen} setModalOpen={setModalOpen}>
+            Não encontrou? Adicione aqui
+          </AddHereButton>
+        </TitleContainer>
+        <ItemsContainer>
+          {coursesList.map(({ id, name }) => (
+            <ItemContainer
+              key={id}
+              whileHover={{ scale: 0.95 }}
+              onClick={() => setComponent('classes')}
+            >
+              {name}
+            </ItemContainer>
+          ))}
+        </ItemsContainer>
+      </PageContainer>
+    </>
   );
 }

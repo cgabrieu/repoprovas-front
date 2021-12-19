@@ -10,12 +10,12 @@ export default function Contribute() {
   return (
     <AnimatePresence>
       {component === 'courses' && (
-        <SlideLeftTransition key={1}>
+        <SlideLeftTransition auxKey={1}>
           <Courses setComponent={setComponent} />
         </SlideLeftTransition>
       )}
       {component === 'classes' && (
-        <SlideLeftTransition key={2}>
+        <SlideLeftTransition auxKey={2}>
           <Classes setComponent={setComponent} />
         </SlideLeftTransition>
       )}

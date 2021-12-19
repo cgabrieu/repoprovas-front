@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion/dist/framer-motion';
 import styled from 'styled-components';
 
-export default function SlideLeftTransition({ key, children }) {
+export default function SlideLeftTransition({ auxKey, children }) {
   const pageMotion = {
     initial: { x: 1200, opacity: 0 },
     animate: { x: 0, opacity: 1 },
@@ -11,7 +11,7 @@ export default function SlideLeftTransition({ key, children }) {
 
   return (
     <MotionBox
-      key={key}
+      key={auxKey}
       initial='initial'
       animate='animate'
       exit='exit'

@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion/dist/framer-motion';
 
-export default function AddHereButton({ children }) {
-  const [modalOpen, setModalOpen] = useState(false);
-
+export default function AddHereButton({ children, modalOpen, setModalOpen }) {
   return (
     <Button
       whileHover={{ scale: 1.07 }}
