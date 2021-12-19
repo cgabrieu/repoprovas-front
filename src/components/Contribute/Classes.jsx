@@ -18,7 +18,7 @@ export default function Classes({ setComponent }) {
       { id: 3, name: 'TRES' },
       { id: 4, name: 'QUATRO' },
     ]);
-  }, []);
+  }, [modalOpen]);
 
   return (
     <>

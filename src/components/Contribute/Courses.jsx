@@ -16,7 +16,7 @@ export default function Courses({ setComponent }) {
     getCourses().then((res) => {
       setCoursesList(res.data);
     });
-  }, []);
+  }, [modalOpen]);
 
   return (
     <>

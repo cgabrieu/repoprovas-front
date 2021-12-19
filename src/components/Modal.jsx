@@ -1,10 +1,14 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion/dist/framer-motion';
 import Backdrop from './Backdrop';
+import { postCourse } from '../services/api/api';
+import {ReactComponent as LoadingIcon} from '../assets/images/loading.svg';
 
 export default function Modal({ setModalOpen, title, description = null }) {
   const [name, setName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const dropIn = {
     hidden: {
@@ -29,7 +33,16 @@ export default function Modal({ setModalOpen, title, description = null }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name);
+    setIsLoading(true);
+    if (title.includes('Curso') && name.length > 2) {
+      postCourse(name)
+        .then(() => setModalOpen(false));
+    }
+    if (title.includes('Matéria') && name.length > 2) {
+      postCourse(name)
+        .then(() => setModalOpen(false));
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -56,12 +69,17 @@ export default function Modal({ setModalOpen, title, description = null }) {
           <Description>{description}</Description>
         )}
         <SubmitButton type='submit' buttonColor={description ? '#C4C4C4' : '#62AF8A;'}>
-          {description ? 'Voltar para home' : 'Enviar'}
+          {isLoading ? <LoadingButton /> : (description ? 'Voltar para home' : 'Enviar')}
         </SubmitButton>
       </Form>
     </Backdrop>
   );
 }
+
+const LoadingButton = styled(LoadingIcon)`
+  width: 30px;
+  height: 30px;
+`;
 
 const SubmitButton = styled.button`
   background-color: ${({ buttonColor }) => buttonColor};
