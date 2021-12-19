@@ -24,7 +24,7 @@ export default function Courses({ setComponent }) {
       </TitleContainer>
       <ItemsContainer>
         {coursesList.map(({ id, name }) => (
-          <ItemContainer key={id} onClick={() => setComponent('classes')}>
+          <ItemContainer key={id} whileHover={{ scale: 0.95 }} onClick={() => setComponent('classes')}>
             {name}
           </ItemContainer>
         ))}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AddHereButton from '../AddHereButton';
 import PageContainer from '../PageContainer';
 import TitleContainer from '../TitleContainer';
@@ -7,10 +6,8 @@ import ItemContainer from '../ItemContainer';
 import ItemsContainer from '../ItemsContainer';
 import TitleText from '../TitleText'
 
-export default function Classes() {
+export default function Classes({ setComponent }) {
   const [classesList, setClassesList] = useState([]);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     setClassesList([
@@ -29,7 +26,7 @@ export default function Classes() {
       </TitleContainer>
       <ItemsContainer>
         {classesList.map(({ id, name }) => (
-          <ItemContainer key={id} onClick={() => navigate('/teachers')}>
+          <ItemContainer key={id} whileHover={{ scale: 0.95 }} onClick={() => setComponent('classes')}>
             {name}
           </ItemContainer>
         ))}

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion/dist/framer-motion';
 
-export default styled.div`
+export default styled(motion.div)`
   font-size: 26px;
   width: 100%;
   height: 80px;

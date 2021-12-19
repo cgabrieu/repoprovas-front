@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion/dist/framer-motion';
-// import styled from 'styled-components';
 import Classes from '../components/Contribute/Classes';
 import Courses from '../components/Contribute/Courses';
 import SlideLeftTransition from '../components/SlideLeftTransition';
@@ -23,7 +22,3 @@ export default function Contribute() {
     </AnimatePresence>
   );
 }
-
-/* const AnimatePresenceContainer = styled(AnimatePresence)`
-  position: relative;
-`; */
