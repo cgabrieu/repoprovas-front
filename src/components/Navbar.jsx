@@ -48,7 +48,7 @@ const Bar = styled.div`
   right: 0;
   justify-content: space-between;
   padding: 0 25px;
-
+  z-index: 5;
   > div {
     display: flex;
     width: 1200px;
