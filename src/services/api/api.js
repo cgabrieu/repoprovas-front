@@ -29,3 +29,14 @@ export function postClasse(name, period, courseId) {
     courseId: [courseId]
   });
 }
+
+export function getTeachersByCourse(courseId) {
+  return api.get(`/teachers?courseId=${courseId}`);
+}
+
+export function postTeachers(name, courseId) {
+  return api.post("/classes", {
+    name,
+    courseId: [courseId]
+  });
+}

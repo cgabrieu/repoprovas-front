@@ -55,6 +55,12 @@ export default function Modal({ setModalOpen, title, description = null }) {
         .catch(() => alert.error(<AlertContainer>Matéria já cadastrada para esse curso.</AlertContainer>))
         .finally(() => setIsLoading(false));
     }
+    if (title.includes('Professor') && name.length > 2) {
+      postClasse(name, period, contribute.courseId)
+        .then(() => setModalOpen(false))
+        .catch(() => alert.error(<AlertContainer>Matéria já cadastrada para esse curso.</AlertContainer>))
+        .finally(() => setIsLoading(false));
+    }
   };
 
   return (

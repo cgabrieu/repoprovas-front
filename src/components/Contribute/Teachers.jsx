@@ -6,7 +6,7 @@ import ItemsContainer from '../ItemsContainer';
 import TitleText from '../TitleText';
 import ModalAnimatePresence from '../ModalAnimatePresence';
 import ContributeContext from '../../contexts/ContributeContext';
-import { getClassesByCourse } from '../../services/api/api';
+import { getTeachersByCourse } from '../../services/api/api';
 import ItemContainer from '../ItemContainer';
 import LoadingMain from '../LoadingMain';
 
@@ -17,8 +17,11 @@ export default function Teachers({ isLoading, setIsLoading, setComponent }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    getClassesByCourse(contribute.courseId)
-      .then((res) => setTeachersList(res.data))
+    getTeachersByCourse(contribute.courseId)
+      .then((res) => {
+        console.log(res.data);
+        setTeachersList(res.data);
+      })
       .finally(() => setIsLoading(false));
   }, [modalOpen]);
 
