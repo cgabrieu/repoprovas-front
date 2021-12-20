@@ -5,7 +5,7 @@ import TitleContainer from '../TitleContainer';
 import TitleText from '../TitleText';
 import ItemContainer from '../ItemContainer';
 
-export default function Periods({ setSearchInfo, setComponent }) {
+export default function Periods({ searchInfo, setSearchInfo, setComponent }) {
 
   return (
     <PageContainer>
@@ -18,7 +18,7 @@ export default function Periods({ setSearchInfo, setComponent }) {
             key={period}
             whileHover={{ scale: 0.95 }}
             onClick={() => {
-              setSearchInfo(period);
+              setSearchInfo({ ...searchInfo, period });
               setComponent('classes');
             }}
           >

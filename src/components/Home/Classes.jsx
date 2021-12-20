@@ -43,7 +43,7 @@ export default function Classes({ searchInfo }) {
             key={name}
             whileHover={{ scale: 0.95 }}
             onClick={() => {
-              
+                 
             }}
           >
             <h2>{name}</h2>
