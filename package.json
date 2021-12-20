@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "dependencies": {
     "axios": "^0.24.0",
-    "downshift": "^6.1.7",
     "faker": "^5.5.3",
     "framer-motion": "^5.5.5",
     "react": "^17.0.2",

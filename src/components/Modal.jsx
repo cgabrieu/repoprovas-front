@@ -1,53 +1,58 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import { useAlert } from 'react-alert';
 import { motion } from 'framer-motion/dist/framer-motion';
 import ContributeContext from '../contexts/ContributeContext';
 import Backdrop from './Backdrop';
 import { postClasse, postCourse } from '../services/api/api';
 import LoadingButton from './LoadingButton';
-import PeriodSelect from './PeriodSelect';
+import PeriodDropdown from './PeriodDropdown';
+import AlertContainer from './AlertContainer';
+
+const dropIn = {
+  hidden: {
+    y: '-100vh',
+    opacity: 0,
+  },
+  visible: {
+    y: '0',
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      type: 'spring',
+      damping: 25,
+      stiffness: 500,
+    },
+  },
+  exit: {
+    y: '100vh',
+    opacity: 0,
+  },
+};
 
 export default function Modal({ setModalOpen, title, description = null }) {
   const { contribute } = useContext(ContributeContext);
-  
+  const alert = useAlert();
+
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  const dropIn = {
-    hidden: {
-      y: '-100vh',
-      opacity: 0,
-    },
-    visible: {
-      y: '0',
-      opacity: 1,
-      transition: {
-        duration: 0.1,
-        type: 'spring',
-        damping: 25,
-        stiffness: 500,
-      },
-    },
-    exit: {
-      y: '100vh',
-      opacity: 0,
-    },
-  };
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [period, setPeriod] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
     if (title.includes('Curso') && name.length > 2) {
-      postCourse(name.toLocaleLowerCase())
+      postCourse(name)
         .then(() => setModalOpen(false))
-        .catch((err) => console.log(err))
+        .catch(() => alert.error(<AlertContainer>Curso já cadastrado.</AlertContainer>))
         .finally(() => setIsLoading(false));
     }
     if (title.includes('Matéria') && name.length > 2) {
-      postClasse(name.toLocaleLowerCase(), period, contribute.courseId)
+      postClasse(name, period, contribute.courseId)
         .then(() => setModalOpen(false))
-        .catch((err) => console.log(err))
+        .catch(() => alert.error(<AlertContainer>Matéria já cadastrada para esse curso.</AlertContainer>))
         .finally(() => setIsLoading(false));
     }
   };
@@ -63,13 +68,13 @@ export default function Modal({ setModalOpen, title, description = null }) {
         onSubmit={handleSubmit}
       >
         <Title>{title}</Title>
-        {title.includes('Matéria') && <PeriodSelect />}
+        {title.includes('Matéria') && <PeriodDropdown period={period} setPeriod={setPeriod} showDropdown={showDropdown} setShowDropdown={setShowDropdown} />}
         {!description ? (
           <Input
             type='text'
             placeholder='Digite o nome'
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setName((e.target.value).toLocaleLowerCase())}
             minLength={3}
             maxLength={40}
           />
@@ -120,7 +125,7 @@ const Form = styled(motion.form)`
   position: absolute;
   top: 30%;
   width: 360px;
-  height: 150px;
+  height: 160px;
   background-color: #303030;
   padding: 20px 20px 10px 20px;
   border-radius: 5px;

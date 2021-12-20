@@ -10,28 +10,28 @@ import { getClassesByCourse } from '../../services/api/api';
 import ItemContainer from '../ItemContainer';
 import LoadingMain from '../LoadingMain';
 
-export default function Classes({ isLoading, setIsLoading, setComponent }) {
+export default function Teachers({ isLoading, setIsLoading, setComponent }) {
   const { contribute, setContribute } = useContext(ContributeContext);
 
-  const [classesList, setClassesList] = useState([]);
+  const [teachersList, setTeachersList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     getClassesByCourse(contribute.courseId)
-      .then((res) => setClassesList(res.data))
+      .then((res) => setTeachersList(res.data))
       .finally(() => setIsLoading(false));
   }, [modalOpen]);
 
   return (
     <>
       <ModalAnimatePresence
-        title="Cadastrar Matéria"
+        title="Cadastrar Professor"
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
       />
       <PageContainer>
         <TitleContainer>
-          <TitleText>Qual Matéria?</TitleText>
+          <TitleText>Qual Professor?</TitleText>
           <AddHereButton modalOpen={modalOpen} setModalOpen={setModalOpen}>
             Não encontrou? Adicione aqui
           </AddHereButton>
@@ -40,7 +40,7 @@ export default function Classes({ isLoading, setIsLoading, setComponent }) {
           <LoadingMain />
         ) : (
           <ItemsContainer>
-            {classesList.map(({ id, name }) => (
+            {teachersList.map(({ id, name }) => (
               <ItemContainer
                 key={id}
                 whileHover={{ scale: 0.95 }}
@@ -48,9 +48,9 @@ export default function Classes({ isLoading, setIsLoading, setComponent }) {
                   setIsLoading(true);
                   setContribute({
                     ...contribute,
-                    classId: id,
+                    teacherId: id,
                   });
-                  setComponent('teachers');
+                  setComponent('testType');
                 }}
               >
                 {name}
