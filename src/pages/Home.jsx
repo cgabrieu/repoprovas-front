@@ -4,13 +4,12 @@ import { AnimatePresence } from 'framer-motion/dist/framer-motion';
 import Courses from '../components/Home/Courses';
 import SlideLeftTransition from '../components/SlideLeftTransition';
 import TestContext from '../contexts/TestContext';
-import Teachers from '../components/Home/Teachers';
-import Years from '../components/Contribute/Years';
+import Periods from '../components/Home/Periods';
 import TestType from '../components/Home/TestType';
-import Semesters from '../components/Contribute/Semesters';
-import Confirm from '../components/Contribute/Confirm';
+import Classes from '../components/Home/Classes';
 import TeacherOrClass from '../components/Home/TeacherOrClass';
 import { getTests } from '../services/api/api';
+import Teachers from '../components/Home/Teachers';
 
 export default function Home() {
   const [component, setComponent] = useState('courses');
@@ -26,40 +25,48 @@ export default function Home() {
       <AnimatePresence>
         {component === 'courses' && (
           <SlideLeftTransition auxKey={1}>
-            <Courses setComponent={setComponent} />
+            <Courses
+              searchInfo={searchInfo}
+              setSearchInfo={setSearchInfo}
+              setComponent={setComponent}
+            />
           </SlideLeftTransition>
         )}
         {component === 'teacherOrClass' && (
           <SlideLeftTransition auxKey={2}>
-            <TeacherOrClass setComponent={setComponent} />
+            <TeacherOrClass
+              searchInfo={searchInfo}
+              setSearchInfo={setSearchInfo}
+              setComponent={setComponent}
+            />
           </SlideLeftTransition>
         )}
         {component === 'teachers' && (
           <SlideLeftTransition auxKey={3}>
             <Teachers
+              searchInfo={searchInfo}
               setSearchInfo={setSearchInfo}
               setComponent={setComponent}
             />
           </SlideLeftTransition>
         )}
         {component === 'testType' && (
+          <SlideLeftTransition auxKey={4}>
+            <TestType searchInfo={searchInfo} setSearchInfo={setSearchInfo} />
+          </SlideLeftTransition>
+        )}
+        {component === 'periods' && (
           <SlideLeftTransition auxKey={5}>
-            <TestType searchInfo={searchInfo} setComponent={setComponent} />
+            <Periods
+              searchInfo={searchInfo}
+              setSearchInfo={setSearchInfo}
+              setComponent={setComponent}
+            />
           </SlideLeftTransition>
         )}
-        {component === 'years' && (
+        {component === 'classes' && (
           <SlideLeftTransition auxKey={6}>
-            <Years setComponent={setComponent} />
-          </SlideLeftTransition>
-        )}
-        {component === 'semesters' && (
-          <SlideLeftTransition auxKey={7}>
-            <Semesters setComponent={setComponent} />
-          </SlideLeftTransition>
-        )}
-        {component === 'confirm' && (
-          <SlideLeftTransition auxKey={8}>
-            <Confirm setComponent={setComponent} />
+            <Classes searchInfo={searchInfo} />
           </SlideLeftTransition>
         )}
       </AnimatePresence>

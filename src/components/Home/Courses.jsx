@@ -6,7 +6,7 @@ import TitleContainer from '../TitleContainer';
 import TitleText from '../TitleText';
 import ItemContainer from '../ItemContainer';
 
-export default function Courses({ setComponent }) {
+export default function Courses({ searchInfo, setSearchInfo, setComponent }) {
   const [coursesList, setCoursesList] = useState([]);
   useEffect(() => {
     getCourses().then((res) => {
@@ -25,6 +25,10 @@ export default function Courses({ setComponent }) {
             key={id}
             whileHover={{ scale: 0.95 }}
             onClick={() => {
+              setSearchInfo({
+                ...searchInfo,
+                courseId: id,
+              });
               setComponent('teacherOrClass');
             }}
           >

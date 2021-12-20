@@ -13,6 +13,7 @@ export default styled(motion.div)`
   justify-content: center;
   margin: 20px 0;
   cursor: pointer;
+  padding: 15px;
   > h4 {
     font-size: 18px;
     color: #656565;

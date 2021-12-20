@@ -5,49 +5,49 @@ import ItemsContainer from '../ItemsContainer';
 import TitleText from '../TitleText';
 import ItemContainer from '../ItemContainer';
 import TestContext from '../../contexts/TestContext';
+import SearchInfoContainer from '../SearchInfoContainer';
 
-export default function Teachers({ searchInfo, setSearchInfo, setComponent }) {
+export default function Classes({ searchInfo }) {
+
   const { listTests } = useContext(TestContext);
 
-  console.log(listTests);
-
-  function getTeachersWithSum() {
+  function getClassesWithSum() {
     const teachersFilteredByCourses = listTests.filter(
       (test) => test.class.courses.some(({ id }) => id === searchInfo.courseId)
     );
-    const teachers = teachersFilteredByCourses.map((test) => test.teacher.name);
-    const uniqueTeachers = [...new Set(teachers)];
-    const countTeachers = [...uniqueTeachers].fill(0);
+    const classes = teachersFilteredByCourses.map((test) => test.class.name);
+    const uniqueClasses = [... new Set(classes)];
+    const countClasses = [...uniqueClasses].fill(0);
 
-    teachers.forEach((t) => {
-      countTeachers[uniqueTeachers.indexOf(t)] += 1;
+    classes.forEach((t) => {
+      countClasses[uniqueClasses.indexOf(t)] += 1;
     });
 
-    const result = uniqueTeachers.map((_, i) => ({
-      name: uniqueTeachers[i],
-      count: countTeachers[i],
+    const result = uniqueClasses.map((_, i) => ({
+      name: uniqueClasses[i],
+      count: countClasses[i],
     }));
-
+  
     return result;
   }
 
   return (
     <PageContainer>
       <TitleContainer>
-        <TitleText>Qual Professor?</TitleText>
+        <TitleText>Qual Matéria?</TitleText>
+        <SearchInfoContainer>{`${searchInfo}º período`}</SearchInfoContainer>
       </TitleContainer>
       <ItemsContainer>
-        {getTeachersWithSum().map(({ name, count }) => (
+        {getClassesWithSum().map(({ name, count }) => (
           <ItemContainer
             key={name}
             whileHover={{ scale: 0.95 }}
             onClick={() => {
-              setSearchInfo(name);
-              setComponent('testType');
+              
             }}
           >
             <h2>{name}</h2>
-            <h4>{`${count} PROVA${count > 1 ? 'S' : ''}`}</h4>
+            <h4>{`${count} PROVA${(count > 1) ? 'S' : ''}`}</h4>
           </ItemContainer>
         ))}
       </ItemsContainer>
