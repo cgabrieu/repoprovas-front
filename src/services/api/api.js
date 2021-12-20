@@ -38,8 +38,8 @@ export function getTeachersByClass(classId) {
   return api.get(`/teachers?classId=${classId}`);
 }
 
-export function postTeachers(name, courseId, classId) {
-  return api.post("/classes", {
+export function postTeacher(name, courseId, classId) {
+  return api.post("/teachers", {
     name,
     courseId: [courseId],
     classId: [classId]

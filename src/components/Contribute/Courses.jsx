@@ -49,6 +49,10 @@ export default function Courses({ isLoading, setIsLoading, setComponent }) {
                   setContribute({
                     ...contribute,
                     courseId: id,
+                    names: {
+                      ...contribute.names,
+                      course: name,
+                    }
                   });
                   setComponent('classes');
                 }}

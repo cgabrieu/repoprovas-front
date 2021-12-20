@@ -6,6 +6,10 @@ import Courses from '../components/Contribute/Courses';
 import SlideLeftTransition from '../components/SlideLeftTransition';
 import ContributeContext from '../contexts/ContributeContext';
 import Teachers from '../components/Contribute/Teachers';
+import Years from '../components/Contribute/Years';
+import TestType from '../components/Contribute/TestType';
+import Semesters from '../components/Contribute/Semesters';
+import Confirm from '../components/Contribute/Confirm';
 
 export default function Contribute() {
   const [component, setComponent] = useState('courses');
@@ -18,6 +22,12 @@ export default function Contribute() {
     teacherId: null,
     classId: null,
     courseId: null,
+    names: {
+      course: null,
+      class: null,
+      teacher: null,
+      type: null,
+    }
   });
 
   return (
@@ -48,6 +58,32 @@ export default function Contribute() {
               setIsLoading={setIsLoading}
               setComponent={setComponent}
             />
+          </SlideLeftTransition>
+        )}
+        {component === 'testType' && (
+          <SlideLeftTransition auxKey={4}>
+            <TestType
+              setComponent={setComponent}
+            />
+          </SlideLeftTransition>
+        )}
+        {component === 'years' && (
+          <SlideLeftTransition auxKey={5}>
+            <Years
+              setComponent={setComponent}
+            />
+          </SlideLeftTransition>
+        )}
+        {component === 'semesters' && (
+          <SlideLeftTransition auxKey={6}>
+            <Semesters
+              setComponent={setComponent}
+            />
+          </SlideLeftTransition>
+        )}
+        {component === 'confirm' && (
+          <SlideLeftTransition auxKey={6}>
+            <Confirm />
           </SlideLeftTransition>
         )}
       </AnimatePresence>

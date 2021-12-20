@@ -49,6 +49,10 @@ export default function Classes({ isLoading, setIsLoading, setComponent }) {
                   setContribute({
                     ...contribute,
                     classId: id,
+                    names: {
+                      ...contribute.names,
+                      class: name,
+                    }
                   });
                   setComponent('teachers');
                 }}

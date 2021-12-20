@@ -5,7 +5,7 @@ import { useAlert } from 'react-alert';
 import { motion } from 'framer-motion/dist/framer-motion';
 import ContributeContext from '../contexts/ContributeContext';
 import Backdrop from './Backdrop';
-import { postClasse, postCourse } from '../services/api/api';
+import { postClasse, postCourse, postTeacher } from '../services/api/api';
 import LoadingButton from './LoadingButton';
 import PeriodDropdown from './PeriodDropdown';
 import AlertContainer from './AlertContainer';
@@ -56,7 +56,7 @@ export default function Modal({ setModalOpen, title, description = null }) {
         .finally(() => setIsLoading(false));
     }
     if (title.includes('Professor') && name.length > 2) {
-      postClasse(name, period, contribute.courseId)
+      postTeacher(name, contribute.courseId, contribute.classId)
         .then(() => setModalOpen(false))
         .catch(() => alert.error(<AlertContainer>Professor já cadastrada para esse curso.</AlertContainer>))
         .finally(() => setIsLoading(false));
