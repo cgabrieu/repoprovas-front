@@ -1,99 +1,68 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion/dist/framer-motion';
 import Courses from '../components/Home/Courses';
 import SlideLeftTransition from '../components/SlideLeftTransition';
-import ContributeContext from '../contexts/ContributeContext';
+import TestContext from '../contexts/TestContext';
 import Teachers from '../components/Home/Teachers';
 import Years from '../components/Contribute/Years';
-import TestType from '../components/Contribute/TestType';
+import TestType from '../components/Home/TestType';
 import Semesters from '../components/Contribute/Semesters';
 import Confirm from '../components/Contribute/Confirm';
 import TeacherOrClass from '../components/Home/TeacherOrClass';
+import { getTests } from '../services/api/api';
 
 export default function Home() {
   const [component, setComponent] = useState('courses');
-  const [isLoading, setIsLoading] = useState(false);
-  const [auxSearch, setAuxSearch] = useState({
-    courseId: null,
-    year: null,
-    period: null,
-    link: null,
-    teacherId: null,
-    names: {
-      teacher: null,
-      period: null,
-    }
-  });
+  const [listTests, setListTests] = useState(null);
+  const [searchInfo, setSearchInfo] = useState(null);
+
+  useEffect(() => {
+    getTests().then((res) => setListTests(res.data));
+  }, []);
 
   return (
-    <ContributeContext.Provider value={{ auxSearch, setAuxSearch }}>
+    <TestContext.Provider value={{ listTests, setListTests }}>
       <AnimatePresence>
         {component === 'courses' && (
           <SlideLeftTransition auxKey={1}>
-            <Courses
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              setComponent={setComponent}
-            />
+            <Courses setComponent={setComponent} />
           </SlideLeftTransition>
         )}
         {component === 'teacherOrClass' && (
           <SlideLeftTransition auxKey={2}>
-            <TeacherOrClass
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              setComponent={setComponent}
-            />
+            <TeacherOrClass setComponent={setComponent} />
           </SlideLeftTransition>
         )}
         {component === 'teachers' && (
           <SlideLeftTransition auxKey={3}>
             <Teachers
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              setComponent={setComponent}
-            />
-          </SlideLeftTransition>
-        )}
-        {component === 'teachers' && (
-          <SlideLeftTransition auxKey={4}>
-            <Teachers
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
+              setSearchInfo={setSearchInfo}
               setComponent={setComponent}
             />
           </SlideLeftTransition>
         )}
         {component === 'testType' && (
-          <SlideLeftTransition auxKey={4}>
-            <TestType
-              setComponent={setComponent}
-            />
+          <SlideLeftTransition auxKey={5}>
+            <TestType searchInfo={searchInfo} setComponent={setComponent} />
           </SlideLeftTransition>
         )}
         {component === 'years' && (
-          <SlideLeftTransition auxKey={5}>
-            <Years
-              setComponent={setComponent}
-            />
+          <SlideLeftTransition auxKey={6}>
+            <Years setComponent={setComponent} />
           </SlideLeftTransition>
         )}
         {component === 'semesters' && (
-          <SlideLeftTransition auxKey={6}>
-            <Semesters
-              setComponent={setComponent}
-            />
+          <SlideLeftTransition auxKey={7}>
+            <Semesters setComponent={setComponent} />
           </SlideLeftTransition>
         )}
         {component === 'confirm' && (
-          <SlideLeftTransition auxKey={6}>
-            <Confirm 
-              setComponent={setComponent}
-            />
+          <SlideLeftTransition auxKey={8}>
+            <Confirm setComponent={setComponent} />
           </SlideLeftTransition>
         )}
       </AnimatePresence>
-    </ContributeContext.Provider>
+    </TestContext.Provider>
   );
 }

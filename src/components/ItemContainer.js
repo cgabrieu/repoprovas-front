@@ -8,10 +8,15 @@ export default styled(motion.div)`
   background-color: #fffaef;
   border-radius: 5px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 20px 0;
   cursor: pointer;
+  > h4 {
+    font-size: 18px;
+    color: #656565;
+  }
   @media (max-width: 450px) {
     font-size: 22px;
   }

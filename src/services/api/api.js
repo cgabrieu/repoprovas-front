@@ -60,3 +60,7 @@ export function postTest(body) {
   delete body.names;
   return api.post("/tests", body);
 }
+
+export function getTests() {
+  return api.get("/tests");
+}

@@ -5,6 +5,7 @@ import ItemsContainer from '../ItemsContainer';
 import TitleContainer from '../TitleContainer';
 import AddHereButton from '../AddHereButton';
 import TitleText from '../TitleText';
+import ModalAnimatePresence from '../ModalAnimatePresence';
 import ContributeContext from '../../contexts/ContributeContext';
 import ItemContainer from '../ItemContainer';
 import LoadingMain from '../LoadingMain';
@@ -22,15 +23,21 @@ export default function Courses({ isLoading, setIsLoading, setComponent }) {
   }, [modalOpen]);
 
   return (
-    <PageContainer>
-      <TitleContainer>
-        <TitleText>Qual Curso?</TitleText>
-        <AddHereButton modalOpen={modalOpen} setModalOpen={setModalOpen}>
-          Não encontrou? Adicione aqui
-        </AddHereButton>
-      </TitleContainer>
-      {isLoading ? (
-        <LoadingMain />
+    <>
+      <ModalAnimatePresence
+        title="Cadastrar Curso"
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
+      <PageContainer>
+        <TitleContainer>
+          <TitleText>Qual Curso?</TitleText>
+          <AddHereButton modalOpen={modalOpen} setModalOpen={setModalOpen}>
+            Não encontrou? Adicione aqui
+          </AddHereButton>
+        </TitleContainer>
+        {isLoading ? (
+          <LoadingMain />
         ) : (
           <ItemsContainer>
             {coursesList.map(({ id, name }) => (
@@ -45,7 +52,7 @@ export default function Courses({ isLoading, setIsLoading, setComponent }) {
                     names: {
                       ...contribute.names,
                       course: name,
-                    },
+                    }
                   });
                   setComponent('classes');
                 }}
@@ -55,6 +62,7 @@ export default function Courses({ isLoading, setIsLoading, setComponent }) {
             ))}
           </ItemsContainer>
         )}
-    </PageContainer>
+      </PageContainer>
+    </>
   );
 }

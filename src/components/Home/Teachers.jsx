@@ -1,57 +1,52 @@
-import React, { useState, useEffect, useContext } from 'react';
-import AddHereButton from '../AddHereButton';
+import React, { useContext } from 'react';
 import PageContainer from '../PageContainer';
 import TitleContainer from '../TitleContainer';
 import ItemsContainer from '../ItemsContainer';
 import TitleText from '../TitleText';
-import ModalAnimatePresence from '../ModalAnimatePresence';
-import ContributeContext from '../../contexts/ContributeContext';
-import { getTeachersByClass } from '../../services/api/api';
 import ItemContainer from '../ItemContainer';
-import LoadingMain from '../LoadingMain';
+import TestContext from '../../contexts/TestContext';
 
-export default function Teachers({ isLoading, setIsLoading, setComponent }) {
-  const { auxSearch, setAuxSearch } = useContext(ContributeContext);
+export default function Teachers({ setSearchInfo, setComponent }) {
 
-  const [teachersList, setTeachersList] = useState([]);
+  const { listTests } = useContext(TestContext);
 
-  useEffect(() => {
-    getTeachersByClass(contribute.classId)
-      .then((res) => setTeachersList(res.data))
-      .finally(() => setIsLoading(false));
-  }, [modalOpen]);
+  function getTeachersWithSum() {
+    const teachers = listTests.map((test) => test.teacher.name);
+    const uniqueTeachers = [... new Set(teachers)];
+    const countTeachers = [...uniqueTeachers].fill(0);
+
+    teachers.forEach((t) => {
+      countTeachers[uniqueTeachers.indexOf(t)] += 1;
+    });
+
+    const result = uniqueTeachers.map((_, i) => ({
+      name: uniqueTeachers[i],
+      count: countTeachers[i],
+    }));
+
+    return result;
+  }
 
   return (
     <PageContainer>
       <TitleContainer>
         <TitleText>Qual Professor?</TitleText>
       </TitleContainer>
-      {isLoading ? (
-        <LoadingMain />
-        ) : (
-          <ItemsContainer>
-            {teachersList.map(({ id, name }) => (
-              <ItemContainer
-                key={id}
-                whileHover={{ scale: 0.95 }}
-                onClick={() => {
-                  setIsLoading(true);
-                  setContribute({
-                    ...contribute,
-                    teacherId: id,
-                    names: {
-                      ...contribute.names,
-                      teacher: name,
-                    }
-                  });
-                  setComponent('testType');
-                }}
-              >
-                {name}
-              </ItemContainer>
-            ))}
-          </ItemsContainer>
-        )}
+      <ItemsContainer>
+        {getTeachersWithSum().map(({ name, count }) => (
+          <ItemContainer
+            key={name}
+            whileHover={{ scale: 0.95 }}
+            onClick={() => {
+              setSearchInfo(name);
+              setComponent('testType');
+            }}
+          >
+            <h2>{name}</h2>
+            <h4>{`${count} PROVA${(count > 1) ? 'S' : ''}`}</h4>
+          </ItemContainer>
+        ))}
+      </ItemsContainer>
     </PageContainer>
   );
 }
