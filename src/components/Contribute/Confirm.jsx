@@ -5,7 +5,7 @@ import ItemsContainer from '../ItemsContainer';
 import TitleContainer from '../TitleContainer';
 import TitleText from '../TitleText';
 import ContributeContext from '../../contexts/ContributeContext';
-import ItemContainer from '../ItemContainer';
+import UploadFileContainer from '../UploadFileContainer';
 
 export default function Confirm() {
   const { contribute } = useContext(ContributeContext);
@@ -22,7 +22,7 @@ export default function Confirm() {
             <p>{`${contribute.names.class} - ${contribute.names.teacher}`}</p>
             <p>{`${contribute.names.type} - ${contribute.year}.${contribute.semester}`}</p>
           </InfoContainer>
-          <ConfirmButton>Enviar</ConfirmButton>
+          <UploadFileContainer contribute={contribute} />
         </ConfirmContainer>
       </ItemsContainer>
     </PageContainer>
@@ -41,16 +41,4 @@ const ConfirmContainer = styled.div`
   background-color: #FFFAEF;
   border-radius: 5px;
   padding: 17px;
-`;
-
-const ConfirmButton = styled.button`
-  background-color: #62AF8A;
-  width: 220px;
-  outline: none;
-  border: none;
-  height: 30px;
-  font-size: 22px;
-  color: #303030;
-  border-radius: 5px;
-  cursor: pointer;
 `;

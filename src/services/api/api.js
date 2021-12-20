@@ -45,3 +45,11 @@ export function postTeacher(name, courseId, classId) {
     classId: [classId]
   });
 }
+
+export function postPreSignedPutUrl(body) {
+  return api.post("/contribute/upload", body);
+}
+
+export function putUploadToAws(url, body) {
+  return api.put(url, body);
+}
