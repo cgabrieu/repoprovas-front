@@ -3,7 +3,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL:
-    process.env.NODE_ENV === "prod"
+    process.env.NODE_ENV === "production"
       ? "https://repoprovas-cgabrieu.herokuapp.com"
       : "http://localhost:4000",
 });
