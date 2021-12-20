@@ -34,9 +34,14 @@ export function getTeachersByCourse(courseId) {
   return api.get(`/teachers?courseId=${courseId}`);
 }
 
-export function postTeachers(name, courseId) {
+export function getTeachersByClass(classId) {
+  return api.get(`/teachers?classId=${classId}`);
+}
+
+export function postTeachers(name, courseId, classId) {
   return api.post("/classes", {
     name,
-    courseId: [courseId]
+    courseId: [courseId],
+    classId: [classId]
   });
 }

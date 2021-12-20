@@ -58,7 +58,7 @@ export default function Modal({ setModalOpen, title, description = null }) {
     if (title.includes('Professor') && name.length > 2) {
       postClasse(name, period, contribute.courseId)
         .then(() => setModalOpen(false))
-        .catch(() => alert.error(<AlertContainer>Matéria já cadastrada para esse curso.</AlertContainer>))
+        .catch(() => alert.error(<AlertContainer>Professor já cadastrada para esse curso.</AlertContainer>))
         .finally(() => setIsLoading(false));
     }
   };
@@ -80,7 +80,7 @@ export default function Modal({ setModalOpen, title, description = null }) {
             type='text'
             placeholder='Digite o nome'
             value={name}
-            onChange={(e) => setName((e.target.value).toLocaleLowerCase())}
+            onChange={(e) => setName(e.target.value)}
             minLength={3}
             maxLength={40}
           />
