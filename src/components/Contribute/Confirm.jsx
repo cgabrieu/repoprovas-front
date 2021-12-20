@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import PageContainer from '../PageContainer';
 import ItemsContainer from '../ItemsContainer';
@@ -9,6 +9,8 @@ import UploadFileContainer from '../UploadFileContainer';
 
 export default function Confirm() {
   const { contribute } = useContext(ContributeContext);
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <PageContainer>
@@ -22,7 +24,7 @@ export default function Confirm() {
             <p>{`${contribute.names.class} - ${contribute.names.teacher}`}</p>
             <p>{`${contribute.names.type} - ${contribute.year}.${contribute.semester}`}</p>
           </InfoContainer>
-          <UploadFileContainer contribute={contribute} />
+          <UploadFileContainer modalOpen={modalOpen} setModalOpen={setModalOpen} contribute={contribute} />
         </ConfirmContainer>
       </ItemsContainer>
     </PageContainer>

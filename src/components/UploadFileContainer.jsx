@@ -1,16 +1,43 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import { useAlert } from 'react-alert';
 import styled from 'styled-components';
-import { postPreSignedPutUrl, putUploadToAws } from '../services/api/api';
+import {
+  postPreSignedPutUrl,
+  postTest,
+  putUploadToAws,
+} from '../services/api/api';
+import AlertContainer from './AlertContainer';
 import LoadingButton from './LoadingButton';
+import ModalAnimatePresence from './ModalAnimatePresence';
 
-export default function UploadFileContainer({ contribute }) {
+export default function UploadFileContainer({
+  contribute,
+  modalOpen,
+  setModalOpen,
+}) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [linkField, setLinkField] = useState('');
-  const [uploadLink, setUploadLink] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
+  const alert = useAlert();
+
   const handleFileInput = (e) => setSelectedFile(e.target.files[0]);
+
+  const handleSubmit = (link) => {
+    setIsLoading(true);
+    postTest({ ...contribute, link })
+      .then(() => {
+        setModalOpen(true);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        if (err.response.status === 400)
+          alert.error(<AlertContainer>A url digitada é inválida</AlertContainer>);
+        setIsLoading(false);
+      });
+  };
 
   const uploadFile = (file) => {
     setIsLoading(true);
@@ -18,26 +45,27 @@ export default function UploadFileContainer({ contribute }) {
       fileName: file.name,
       fileType: file.type,
     };
-
     postPreSignedPutUrl(body).then((res) => {
-      putUploadToAws(res.data, file)
-        .then((response) => {
-          setUploadLink(response.url);
-        })
-        .catch((err) => console.log(err));
+      putUploadToAws(res.data, file).then(() => {});
     });
   };
 
   return (
     <>
+      <ModalAnimatePresence
+        title="Obrigado pela contribuição!"
+        description="Sem você não seríamos nada 😌"
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
       <UploadContainer>
         <label htmlFor="files">Selecione o Pdf</label>
         <input id="files" type="file" onChange={handleFileInput} />
         <p>{selectedFile?.name || 'Nenhum arquivo selecionado'}</p>
       </UploadContainer>
       <InputUrl
-        type='url'
-        placeholder='OU COLE A URL'
+        type="url"
+        placeholder="OU COLE A URL"
         value={linkField}
         onChange={(e) => setLinkField(e.target.value)}
       />
@@ -45,7 +73,7 @@ export default function UploadFileContainer({ contribute }) {
         disable={isLoading}
         onClick={() => {
           if (selectedFile) uploadFile(selectedFile);
-          
+          else handleSubmit(linkField);
         }}
       >
         {isLoading ? <LoadingButton /> : 'Enviar'}

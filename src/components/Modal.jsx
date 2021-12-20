@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useAlert } from 'react-alert';
 import { motion } from 'framer-motion/dist/framer-motion';
+import { useNavigate } from 'react-router-dom';
 import ContributeContext from '../contexts/ContributeContext';
 import Backdrop from './Backdrop';
 import { postClasse, postCourse, postTeacher } from '../services/api/api';
@@ -34,6 +35,7 @@ const dropIn = {
 export default function Modal({ setModalOpen, title, description = null }) {
   const { contribute } = useContext(ContributeContext);
   const alert = useAlert();
+  const navigate = useNavigate();
 
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -43,6 +45,7 @@ export default function Modal({ setModalOpen, title, description = null }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
+    if (title.includes('Obrigado')) navigate('/');
     if (title.includes('Curso') && name.length > 2) {
       postCourse(name)
         .then(() => setModalOpen(false))

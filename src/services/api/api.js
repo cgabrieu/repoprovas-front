@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios from "axios";
 
 const api = axios.create({
@@ -52,4 +53,10 @@ export function postPreSignedPutUrl(body) {
 
 export function putUploadToAws(url, body) {
   return api.put(url, body);
+}
+
+export function postTest(body) {
+  delete body.courseId;
+  delete body.names;
+  return api.post("/tests", body);
 }
