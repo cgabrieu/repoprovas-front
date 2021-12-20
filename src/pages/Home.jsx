@@ -1,37 +1,33 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion/dist/framer-motion';
-import Classes from '../components/Contribute/Classes';
-import Courses from '../components/Contribute/Courses';
+import Courses from '../components/Home/Courses';
 import SlideLeftTransition from '../components/SlideLeftTransition';
 import ContributeContext from '../contexts/ContributeContext';
-import Teachers from '../components/Contribute/Teachers';
+import Teachers from '../components/Home/Teachers';
 import Years from '../components/Contribute/Years';
 import TestType from '../components/Contribute/TestType';
 import Semesters from '../components/Contribute/Semesters';
 import Confirm from '../components/Contribute/Confirm';
+import TeacherOrClass from '../components/Home/TeacherOrClass';
 
-export default function Contribute() {
+export default function Home() {
   const [component, setComponent] = useState('courses');
   const [isLoading, setIsLoading] = useState(false);
-  const [contribute, setContribute] = useState({
+  const [auxSearch, setAuxSearch] = useState({
+    courseId: null,
     year: null,
-    semester: null,
-    type: null,
+    period: null,
     link: null,
     teacherId: null,
-    classId: null,
-    courseId: null,
     names: {
-      course: null,
-      class: null,
       teacher: null,
-      type: null,
+      period: null,
     }
   });
 
   return (
-    <ContributeContext.Provider value={{ contribute, setContribute }}>
+    <ContributeContext.Provider value={{ auxSearch, setAuxSearch }}>
       <AnimatePresence>
         {component === 'courses' && (
           <SlideLeftTransition auxKey={1}>
@@ -42,9 +38,9 @@ export default function Contribute() {
             />
           </SlideLeftTransition>
         )}
-        {component === 'classes' && (
+        {component === 'teacherOrClass' && (
           <SlideLeftTransition auxKey={2}>
-            <Classes
+            <TeacherOrClass
               isLoading={isLoading}
               setIsLoading={setIsLoading}
               setComponent={setComponent}
@@ -53,6 +49,15 @@ export default function Contribute() {
         )}
         {component === 'teachers' && (
           <SlideLeftTransition auxKey={3}>
+            <Teachers
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              setComponent={setComponent}
+            />
+          </SlideLeftTransition>
+        )}
+        {component === 'teachers' && (
+          <SlideLeftTransition auxKey={4}>
             <Teachers
               isLoading={isLoading}
               setIsLoading={setIsLoading}

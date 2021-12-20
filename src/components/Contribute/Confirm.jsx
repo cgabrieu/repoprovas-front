@@ -7,7 +7,7 @@ import TitleText from '../TitleText';
 import ContributeContext from '../../contexts/ContributeContext';
 import UploadFileContainer from '../UploadFileContainer';
 
-export default function Confirm() {
+export default function Confirm({ setComponent }) {
   const { contribute } = useContext(ContributeContext);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,10 +26,19 @@ export default function Confirm() {
           </InfoContainer>
           <UploadFileContainer modalOpen={modalOpen} setModalOpen={setModalOpen} contribute={contribute} />
         </ConfirmContainer>
+        <BackStartText onClick={() => setComponent('classes')}>Algum erro? Clique para voltar</BackStartText>
       </ItemsContainer>
     </PageContainer>
   );
 }
+
+const BackStartText = styled.h3`
+  font-size: 20px;
+  margin-top: 10px;
+  text-align: center;
+  cursor: pointer;
+  color: #FFFAEF;
+`;
 
 const InfoContainer = styled.div`
   width: 100%;

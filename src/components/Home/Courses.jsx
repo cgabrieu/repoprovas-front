@@ -3,31 +3,25 @@ import PageContainer from '../PageContainer';
 import { getCourses } from '../../services/api/api';
 import ItemsContainer from '../ItemsContainer';
 import TitleContainer from '../TitleContainer';
-import AddHereButton from '../AddHereButton';
 import TitleText from '../TitleText';
 import ContributeContext from '../../contexts/ContributeContext';
 import ItemContainer from '../ItemContainer';
 import LoadingMain from '../LoadingMain';
 
 export default function Courses({ isLoading, setIsLoading, setComponent }) {
-  const { contribute, setContribute } = useContext(ContributeContext);
+  const { auxSearch, setAuxSearch } = useContext(ContributeContext);
 
   const [coursesList, setCoursesList] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-
   useEffect(() => {
     getCourses().then((res) => {
       setCoursesList(res.data);
     });
-  }, [modalOpen]);
+  }, []);
 
   return (
     <PageContainer>
       <TitleContainer>
-        <TitleText>Qual Curso?</TitleText>
-        <AddHereButton modalOpen={modalOpen} setModalOpen={setModalOpen}>
-          Não encontrou? Adicione aqui
-        </AddHereButton>
+        <TitleText>O que você cursa?</TitleText>
       </TitleContainer>
       {isLoading ? (
         <LoadingMain />
@@ -39,15 +33,11 @@ export default function Courses({ isLoading, setIsLoading, setComponent }) {
                 whileHover={{ scale: 0.95 }}
                 onClick={() => {
                   setIsLoading(true);
-                  setContribute({
-                    ...contribute,
+                  setAuxSearch({
+                    ...auxSearch,
                     courseId: id,
-                    names: {
-                      ...contribute.names,
-                      course: name,
-                    },
-                  });
-                  setComponent('classes');
+                  })
+                  setComponent('teacherOrClass');
                 }}
               >
                 {name}
