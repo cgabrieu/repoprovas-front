@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AddHereButton from '../AddHereButton';
 import PageContainer from '../PageContainer';
 import TitleContainer from '../TitleContainer';
-import ItemContainer from '../ItemContainer';
 import ItemsContainer from '../ItemsContainer';
 import TitleText from '../TitleText';
 import ModalAnimatePresence from '../ModalAnimatePresence';
+import ContributeContext from '../../contexts/ContributeContext';
+import { getClassesByCourse } from '../../services/api/api';
+import ItemContainer from '../ItemContainer';
+import LoadingMain from '../LoadingMain';
 
-export default function Classes({ setComponent }) {
+export default function Classes({ isLoading, setIsLoading, setComponent }) {
+  const { contribute, setContribute } = useContext(ContributeContext);
+
   const [classesList, setClassesList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    setClassesList([
-      { id: 1, name: 'UMA' },
-      { id: 2, name: 'DUAS' },
-      { id: 3, name: 'TRES' },
-      { id: 4, name: 'QUATRO' },
-    ]);
+    getClassesByCourse(contribute.courseId)
+      .then((res) => setClassesList(res.data))
+      .finally(() => setIsLoading(false));
   }, [modalOpen]);
 
   return (
     <>
       <ModalAnimatePresence
-        title='Cadastrar Matéria'
+        title="Cadastrar Matéria"
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
       />
@@ -34,17 +36,28 @@ export default function Classes({ setComponent }) {
             Não encontrou? Adicione aqui
           </AddHereButton>
         </TitleContainer>
-        <ItemsContainer>
-          {classesList.map(({ id, name }) => (
-            <ItemContainer
-              key={id}
-              whileHover={{ scale: 0.95 }}
-              onClick={() => setComponent('classes')}
-            >
-              {name}
-            </ItemContainer>
-          ))}
-        </ItemsContainer>
+        {isLoading ? (
+          <LoadingMain />
+        ) : (
+          <ItemsContainer>
+            {classesList.map(({ id, name }) => (
+              <ItemContainer
+                key={id}
+                whileHover={{ scale: 0.95 }}
+                onClick={() => {
+                  setIsLoading(true);
+                  setContribute({
+                    ...contribute,
+                    classId: id,
+                  });
+                  setComponent('teacher');
+                }}
+              >
+                {name}
+              </ItemContainer>
+            ))}
+          </ItemsContainer>
+        )}
       </PageContainer>
     </>
   );

@@ -1,12 +1,16 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion/dist/framer-motion';
+import ContributeContext from '../contexts/ContributeContext';
 import Backdrop from './Backdrop';
-import { postCourse } from '../services/api/api';
-import {ReactComponent as LoadingIcon} from '../assets/images/loading.svg';
+import { postClasse, postCourse } from '../services/api/api';
+import LoadingButton from './LoadingButton';
+import PeriodSelect from './PeriodSelect';
 
 export default function Modal({ setModalOpen, title, description = null }) {
+  const { contribute } = useContext(ContributeContext);
+  
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,14 +39,17 @@ export default function Modal({ setModalOpen, title, description = null }) {
     e.preventDefault();
     setIsLoading(true);
     if (title.includes('Curso') && name.length > 2) {
-      postCourse(name)
-        .then(() => setModalOpen(false));
+      postCourse(name.toLocaleLowerCase())
+        .then(() => setModalOpen(false))
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
     }
     if (title.includes('Matéria') && name.length > 2) {
-      postCourse(name)
-        .then(() => setModalOpen(false));
+      postClasse(name.toLocaleLowerCase(), period, contribute.courseId)
+        .then(() => setModalOpen(false))
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
     }
-    setIsLoading(false);
   };
 
   return (
@@ -56,6 +63,7 @@ export default function Modal({ setModalOpen, title, description = null }) {
         onSubmit={handleSubmit}
       >
         <Title>{title}</Title>
+        {title.includes('Matéria') && <PeriodSelect />}
         {!description ? (
           <Input
             type='text'
@@ -75,11 +83,6 @@ export default function Modal({ setModalOpen, title, description = null }) {
     </Backdrop>
   );
 }
-
-const LoadingButton = styled(LoadingIcon)`
-  width: 30px;
-  height: 30px;
-`;
 
 const SubmitButton = styled.button`
   background-color: ${({ buttonColor }) => buttonColor};

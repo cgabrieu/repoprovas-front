@@ -17,3 +17,15 @@ export function postCourse(name) {
     name,
   });
 }
+
+export function getClassesByCourse(courseId) {
+  return api.get(`/classes?courseId=${courseId}`);
+}
+
+export function postClasse(name, period, courseId) {
+  return api.post("/classes", {
+    name,
+    period,
+    courseId: [courseId]
+  });
+}

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export default function SlideLeftTransition({ auxKey, children }) {
   const pageMotion = {
-    initial: { x: 1200, opacity: 0 },
+    initial: { x: 1100, opacity: 0 },
     animate: { x: 0, opacity: 1 },
     exit: { x: -1500, opacity: 0 },
   };
