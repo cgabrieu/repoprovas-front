@@ -8,6 +8,14 @@ import TestContext from '../../contexts/TestContext';
 
 export default function Periods({ searchInfo, setSearchInfo, setComponent }) {
   const { listTests } = useContext(TestContext);
+  console.log(listTests);
+  console.log(searchInfo);
+
+
+  function getPeriodsByCourse() {
+    const testsByCourse = listTests.filter((t) => t.class.courses.some((c) => c.id === searchInfo.courseId))
+    return [...new Set(testsByCourse.map((t) => t.class.period))];
+  }
 
   return (
     <PageContainer>
@@ -15,19 +23,17 @@ export default function Periods({ searchInfo, setSearchInfo, setComponent }) {
         <TitleText>Qual Período?</TitleText>
       </TitleContainer>
       <ItemsContainer>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-          .filter((n) => listTests.some((t) => t.class.period === n))
-          .map((period) => (
-            <ItemContainer
-              key={period}
-              whileHover={{ scale: 0.95 }}
-              onClick={() => {
+        {getPeriodsByCourse().map((period) => (
+          <ItemContainer
+            key={period}
+            whileHover={{ scale: 0.95 }}
+            onClick={() => {
                 setSearchInfo({ ...searchInfo, period });
                 setComponent('classes');
               }}
-            >
-              {`${period}º período`}
-            </ItemContainer>
+          >
+            {`${period}º período`}
+          </ItemContainer>
           ))}
       </ItemsContainer>
     </PageContainer>

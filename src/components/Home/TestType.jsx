@@ -87,7 +87,6 @@ const ItemName = styled.h2`
 `;
 
 const TestItem = styled.div`
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
