@@ -12,9 +12,7 @@ export default function Navbar({ showSidebar, setShowSidebar }) {
     <>
       <Bar>
         <div>
-          <Link to="/">
-            <LogoRepoProvas src={LogoImage} alt="RepoProvas" />
-          </Link>
+          <LogoRepoProvas src={LogoImage} alt="RepoProvas" onClick={() => window.location.reload()} />
           <LinkAndMenuIcon>
             {useLocation().pathname.includes('contribua') ? (
               <DynamicLink to="/">Busque uma prova</DynamicLink>
@@ -30,9 +28,7 @@ export default function Navbar({ showSidebar, setShowSidebar }) {
         </div>
       </Bar>
       <Presets.TransitionSlideRight>
-        {showSidebar && (
-          <Sidebar />
-        )}
+        {showSidebar && <Sidebar />}
       </Presets.TransitionSlideRight>
     </>
   );

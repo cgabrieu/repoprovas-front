@@ -27,7 +27,7 @@ export default function Contribute() {
       class: null,
       teacher: null,
       type: null,
-    }
+    },
   });
 
   return (
@@ -62,30 +62,22 @@ export default function Contribute() {
         )}
         {component === 'testType' && (
           <SlideLeftTransition auxKey={4}>
-            <TestType
-              setComponent={setComponent}
-            />
+            <TestType setComponent={setComponent} />
           </SlideLeftTransition>
         )}
         {component === 'years' && (
           <SlideLeftTransition auxKey={5}>
-            <Years
-              setComponent={setComponent}
-            />
+            <Years setComponent={setComponent} />
           </SlideLeftTransition>
         )}
         {component === 'semesters' && (
           <SlideLeftTransition auxKey={6}>
-            <Semesters
-              setComponent={setComponent}
-            />
+            <Semesters setComponent={setComponent} />
           </SlideLeftTransition>
         )}
         {component === 'confirm' && (
           <SlideLeftTransition auxKey={6}>
-            <Confirm 
-              setComponent={setComponent}
-            />
+            <Confirm />
           </SlideLeftTransition>
         )}
       </AnimatePresence>

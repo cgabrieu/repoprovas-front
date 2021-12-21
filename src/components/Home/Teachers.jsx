@@ -9,8 +9,6 @@ import TestContext from '../../contexts/TestContext';
 export default function Teachers({ searchInfo, setSearchInfo, setComponent }) {
   const { listTests } = useContext(TestContext);
 
-  console.log(listTests);
-
   function getTeachersWithSum() {
     const teachersFilteredByCourses = listTests.filter(
       (test) => test.class.courses.some(({ id }) => id === searchInfo.courseId)

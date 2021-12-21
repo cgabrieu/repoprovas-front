@@ -7,7 +7,7 @@ import TitleText from '../TitleText';
 import ContributeContext from '../../contexts/ContributeContext';
 import UploadFileContainer from '../UploadFileContainer';
 
-export default function Confirm({ setComponent }) {
+export default function Confirm() {
   const { contribute } = useContext(ContributeContext);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function Confirm({ setComponent }) {
           </InfoContainer>
           <UploadFileContainer modalOpen={modalOpen} setModalOpen={setModalOpen} contribute={contribute} />
         </ConfirmContainer>
-        <BackStartText onClick={() => setComponent('classes')}>Algum erro? Clique para voltar</BackStartText>
+        <BackStartText onClick={() => window.location.reload()}>Algum erro? Clique para voltar</BackStartText>
       </ItemsContainer>
     </PageContainer>
   );
