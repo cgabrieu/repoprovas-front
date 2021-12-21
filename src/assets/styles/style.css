@@ -7,19 +7,6 @@
 }
 
 body {
-  background: rgb(2,0,36);
-  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(48,48,48,1) 100%);
-  font-family: 'Raleway', sans-serif;
-}
-
-@keyframes customTransaction {
-  0%{
-      opacity: 0;
-      transform: scale(0.9);
-  }
-
-  100%{
-      opacity: 1;
-      transform: translate(0);
-  }
+  background-color: #303030;
+  font-family: 'Bebas Neue', cursive;
 }

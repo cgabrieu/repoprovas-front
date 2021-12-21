@@ -10,9 +10,6 @@ export default function PageContainer({ children }) {
 }
 
 const Container = styled.div`
-  max-width: 450px;
-  margin: 0 auto;
-  padding: 25px 15px 5px 15px;
-  height: 100%;
-  animation: customTransaction .7s
+  max-width: 1200px;
+  margin: 85px auto;
 `;
