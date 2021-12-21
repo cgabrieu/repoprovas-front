@@ -44,7 +44,6 @@ export default function Classes({ searchInfo }) {
     const testsFiltered = listTests.filter(
       (test) => (test.class.name === className) && (test.class.courses.some((c) => c.id === searchInfo.courseId))
     );
-    console.log(testsFiltered);
     return testsFiltered;
   }
 
