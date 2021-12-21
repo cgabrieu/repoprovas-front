@@ -112,6 +112,7 @@ const SubmitButton = styled.button`
 
 const Description = styled.h2`
   font-size: 22px;
+  font-color: #FFFAEF;
 `;
 
 const Title = styled.h1`
