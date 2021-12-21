@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+## Repoprovas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <h4>This is the frontend repo, access the backend repo <a href="https://github.com/cgabrieu/repoprovas-front">here</a>.</h4>
+  <a href="https://repoprovas-front-bqaa6s681-cgabrieu.vercel.app/">
+    <img src="https://user-imaaages.githubusercontent.com/25062334/144354678-760db174-fabb-41d1-a997-db36a92d044b.gif">
+  </a>
+    <br />
+    <a href="https://repoprovas-front-bqaa6s681-cgabrieu.vercel.app/">View the deploy</a>
+    <br />
+</div>
+  
+<br/>
 
-## Available Scripts
+## About
 
-In the project directory, you can run:
+A simple but wonderful application for you to express your gratitude. Subscribe and receive at home wonderful products to keep yourself grateful.
+    
+<br/>
 
-### `yarn start`
+## Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Tools that were used in the project:
+<p>
+  <img src='https://img.shields.io/badge/React-000000?style=for-the-badge&logo=react&logoColor=white'>
+  <img src='https://img.shields.io/badge/styled--components-000000?style=for-the-badge&logo=styled-components&logoColor=white'>
+  <img src='https://img.shields.io/badge/eslint-000000?style=for-the-badge&logo=eslint&logoColor=white'>
+  <img src='https://img.shields.io/badge/npm-000000?style=for-the-badge&logo=npm&logoColor=white'>
+  <img src='https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white'>
+</p>
+  
+<br/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `yarn test`
+To run locally follow the steps
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `yarn build`
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+```sh
+npm install npm@latest -g
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Create the root folder named gratibox and access it
+```sh
+mkdir repoprovas && cd repoprovas
+```
+2. Clone the frontend repo
+```sh
+git clone https://github.com/cgabrieu/repoprovas-front.git
+```
+3. Install dependencies with npm
+```sh
+npm install
+```
+4. Clone the backend repo
+```sh
+git clone https://github.com/cgabrieu/repoprovas-api.git
+```
+5. Install dependencies with npm
+```sh
+npm install
+```
+6. Create a database using the command below via postgres
+```sh
+CREATE DATABASE repoprovas;
+```
+7. Automatically create all necessary tables to backend repo with <a href="https://github.com/cgabrieu/repoprovas-api/blob/main/dump.sql">dump</a>. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+8. Connect your backend to the database, for that, rename the .env.example to .env.dev and fill in your data.
 
-### `yarn eject`
+### How to run
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Run the backend using the command (remember to be on the backend repo): 
+```sh
+npm run start:dev
+```
+2. Run the frontend using the command (remember to be on the fronend repo): 
+```sh
+npm start
+```
+  
+<br/>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Developer
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* [Carlos Gabriel](https://github.com/cgabrieu)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
