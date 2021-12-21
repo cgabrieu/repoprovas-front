@@ -14,7 +14,7 @@
 
 ## About
 
-A simple but wonderful application for you to express your gratitude. Subscribe and receive at home wonderful products to keep yourself grateful.
+This is a repository of tests, it can be extended to your college. In it you can share the old tests of teachers and classes for them to have support in the tests. It is also possible to add new courses, teachers and classes and upload the tests directly through the app.
     
 <br/>
 
@@ -45,9 +45,9 @@ npm install npm@latest -g
 
 ### Installation
 
-1. Create the root folder named gratibox and access it
+1. Create the root folder named repoprovas and access it
 ```sh
-mkdir repoprovas && cd repoprovas
+mkdir repoprovas-api && cd repoprovas-api
 ```
 2. Clone the frontend repo
 ```sh
