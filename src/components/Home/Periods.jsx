@@ -8,9 +8,6 @@ import TestContext from '../../contexts/TestContext';
 
 export default function Periods({ searchInfo, setSearchInfo, setComponent }) {
   const { listTests } = useContext(TestContext);
-  console.log(listTests);
-  console.log(searchInfo);
-
 
   function getPeriodsByCourse() {
     const testsByCourse = listTests.filter((t) => t.class.courses.some((c) => c.id === searchInfo.courseId))

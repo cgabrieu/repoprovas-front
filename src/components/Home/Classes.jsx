@@ -19,11 +19,13 @@ export default function Classes({ searchInfo }) {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   function getClassesWithSum() {
-    const teachersFilteredByCourses = listTests.filter(
-      (test) => (test.class.courses.some(({ id }) => (id === searchInfo.courseId))) && (test.class.period === searchInfo.period)
+    const classesFilteredByCourses = listTests.filter(
+      (test) =>
+        test.class.courses.some(({ id }) => id === searchInfo.courseId) &&
+        test.class.period === searchInfo.period
     );
-    const classes = teachersFilteredByCourses.map((test) => test.class.name);
-    const uniqueClasses = [... new Set(classes)];
+    const classes = classesFilteredByCourses.map((test) => test.class.name);
+    const uniqueClasses = [...new Set(classes)];
     const countClasses = [...uniqueClasses].fill(0);
 
     classes.forEach((t) => {
@@ -34,8 +36,16 @@ export default function Classes({ searchInfo }) {
       name: uniqueClasses[i],
       count: countClasses[i],
     }));
-  
+
     return result;
+  }
+
+  function getTestsByClassName(className) {
+    const testsFiltered = listTests.filter(
+      (test) => (test.class.name === className) && (test.class.courses.some((c) => c.id === searchInfo.courseId))
+    );
+    console.log(testsFiltered);
+    return testsFiltered;
   }
 
   return (
@@ -57,18 +67,21 @@ export default function Classes({ searchInfo }) {
             <h2>{name}</h2>
             {openDropdown === name && (
               <TestsItemsContainer>
-                {list.map(({ id, year, semester, class: classname, link }) => (
-                  <TestItem key={id}>
-                    <ItemName>{`${year}.${semester} - ${classname.name}`}</ItemName>
-                    <ItemLink onClick={() => { 
-                      window.location = link;
-                    }}
-                    />
-                  </TestItem>
-                ))}
+                {getTestsByClassName(name).map(
+                  ({ id, year, semester, teacher, link }) => (
+                    <TestItem key={id}>
+                      <ItemName>{`${year}.${semester} - ${teacher.name}`}</ItemName>
+                      <ItemLink
+                        onClick={() => {
+                          window.location = link;
+                        }}
+                      />
+                    </TestItem>
+                  )
+                )}
               </TestsItemsContainer>
             )}
-            <h4>{`${count} PROVA${(count > 1) ? 'S' : ''}`}</h4>
+            {!openDropdown && <h4>{`${count} PROVA${count > 1 ? 'S' : ''}`}</h4>}
           </ItemContainer>
         ))}
       </ItemsContainer>
@@ -106,4 +119,3 @@ const TestsItemsContainer = styled.div`
   height: 100%;
   width: 100%;
 `;
-
