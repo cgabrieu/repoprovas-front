@@ -1,12 +1,12 @@
-## Repoprovas
+## Repo Provas 📚
 
 <div align="center">
-  <h4>This is the frontend repo, access the backend repo <a href="https://github.com/cgabrieu/repoprovas-front">here</a>.</h4>
-  <a href="https://repoprovas-front-bqaa6s681-cgabrieu.vercel.app/">
+  <h4>This is the frontend repo, access the backend repo <a href="https://github.com/cgabrieu/repoprovas-api">here</a>.</h4>
+  <a href="https://repoprovas-front-sigma.vercel.app/">
     <img src="https://user-imaaages.githubusercontent.com/25062334/144354678-760db174-fabb-41d1-a997-db36a92d044b.gif">
   </a>
     <br />
-    <a href="https://repoprovas-front-bqaa6s681-cgabrieu.vercel.app/">View the deploy</a>
+    <a href="https://repoprovas-front-sigma.vercel.app/">View the deploy</a>
     <br />
 </div>
   
@@ -22,11 +22,11 @@ This is a repository of tests, it can be extended to your college. In it you can
 
 Tools that were used in the project:
 <p>
-  <img src='https://img.shields.io/badge/React-000000?style=for-the-badge&logo=react&logoColor=white'>
-  <img src='https://img.shields.io/badge/styled--components-000000?style=for-the-badge&logo=styled-components&logoColor=white'>
-  <img src='https://img.shields.io/badge/eslint-000000?style=for-the-badge&logo=eslint&logoColor=white'>
-  <img src='https://img.shields.io/badge/npm-000000?style=for-the-badge&logo=npm&logoColor=white'>
-  <img src='https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white'>
+  <img src='https://img.shields.io/badge/React-000000?style=for-the-badge&logo=react'>
+  <img src='https://img.shields.io/badge/styled--components-000000?style=for-the-badge&logo=styled-components'>
+  <img src='https://img.shields.io/badge/eslint-000000?style=for-the-badge&logo=eslint&logoColor=482fbd'>
+  <img src='https://img.shields.io/badge/npm-000000?style=for-the-badge&logo=npm'>
+  <img src='https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel'>
 </p>
   
 <br/>
@@ -83,7 +83,14 @@ npm run start:dev
 ```sh
 npm start
 ```
-  
+
+## How to contribute
+
+1. Fork the project.
+2. Create a new branch with your changes: `git checkout -b feat/myFeatureName`
+3. For each feature implemented, make a commit specifying what was done
+4. Submit your changes: `git push -u origin feat/myFeatureName`
+
 <br/>
 
 ## Developer
