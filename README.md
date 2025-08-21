@@ -6,7 +6,7 @@
     <img src="https://user-imaaages.githubusercontent.com/25062334/144354678-760db174-fabb-41d1-a997-db36a92d044b.gif">
   </a>
     <br />
-    <a href="https://repoprovas-front-sigma.vercel.app/">View the deploy</a>
+    <a href="https://repoprovas-front-sigma.vercel.app/">View</a>
     <br />
 </div>
   
